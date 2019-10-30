@@ -12,9 +12,7 @@ export default class extends React.Component {
             <Main>
                 <Switch>
                     {configs.map(item => (
-                        <Route key={item.name} path={item.path} exact={!!item.exact}>
-                            <item.page />
-                        </Route>
+                        <Route key={item.name} path={item.path} exact={!!item.exact} component={item.page} />
                     ))}
                 </Switch>
             </Main>

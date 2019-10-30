@@ -2,7 +2,7 @@ import React from 'react';
 import './index.less';
 import { Input, Button } from 'element-react';
 
-export default class extends React.Component<iReactRoute> {
+export default class extends React.Component<any, iReactRoute> {
     render() {
         return (
             <div id="login">
