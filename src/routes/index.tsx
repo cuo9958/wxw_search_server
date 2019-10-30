@@ -1,18 +1,21 @@
 import React from 'react';
-import { withRouter, Switch } from 'react-router-dom';
+import { withRouter, Switch, Route } from 'react-router-dom';
 
 import Layout from '../pages/layout/index';
-import Routes from './routes';
+import configs from './config';
 
 const Main = withRouter((props: any) => <Layout {...props} />);
 
 export default class extends React.Component {
-
     render() {
         return (
             <Main>
                 <Switch>
-                    <Routes />
+                    {configs.map(item => (
+                        <Route key={item.name} path={item.path} exact={!!item.exact}>
+                            <item.page />
+                        </Route>
+                    ))}
                 </Switch>
             </Main>
         );

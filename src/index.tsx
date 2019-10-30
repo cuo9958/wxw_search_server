@@ -12,7 +12,7 @@ class App extends React.Component {
     render() {
         return (
             <Provider {...stores}>
-                <HashRouter ref="navigator">
+                <HashRouter>
                     <Routes />
                 </HashRouter>
             </Provider>
