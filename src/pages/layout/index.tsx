@@ -15,14 +15,25 @@ function RenderMenus(props: any) {
     );
 }
 
-export default class extends React.Component<iReactRoute> {
+interface iState {
+    active: string;
+}
+
+export default class extends React.Component<iReactRoute, iState> {
+    constructor(props: any) {
+        super(props);
+        const curr = Utils.checkUrl(props.location.pathname);
+        this.state = {
+            active: curr ? curr.path : '/'
+        };
+    }
     render() {
         return (
             <div>
                 <div id="sider">
                     <div id="logo">后台系统 v1.0</div>
                     <div id="menus">
-                        <Menu mode="vertical" onSelect={this.onSelect} defaultActive="/" theme="dark">
+                        <Menu mode="vertical" onSelect={this.onSelect} defaultActive={this.state.active} theme="dark">
                             {url_configs.map(item => (
                                 <RenderMenus key={item.name} item={item} />
                             ))}
@@ -34,14 +45,7 @@ export default class extends React.Component<iReactRoute> {
         );
     }
 
-    componentDidMount() {
-        console.log(Utils.checkUrl(this.props.location.pathname));
-    }
-    componentWillUpdate() {
-        console.log('adw');
-    }
-
     onSelect = (index: string) => {
-        console.log('select', index);
+        this.props.history.push(index);
     };
 }
