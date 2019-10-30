@@ -1,0 +1,33 @@
+@left-width: 210px; //框架左侧的宽度
+
+#sider {
+    position: fixed;
+    left: 0;
+    top: 0;
+    min-height: 100%;
+    width: @left-width;
+    background: #1f2d3d;
+    box-shadow: 5px 0 10px 1px rgba(200, 200, 200, 0.5);
+
+    #logo {
+        height: 40px;
+        color: #efefef;
+        padding: 10px 10px;
+        background: #324057;
+        border-bottom: solid 1px #475669;
+        font-size: 14px;
+    }
+    #menus {
+        .el-menu--horizontal.el-menu--dark .el-submenu .el-menu-item,
+        .el-menu-item {
+            color: #EFF2F7;
+        }
+        .el-menu--horizontal.el-menu--dark .el-submenu .el-menu-item.is-active,
+        .el-menu-item.is-active {
+            color: #20A0FF;
+        }
+    }
+}
+#main {
+    margin-left: @left-width;
+}
