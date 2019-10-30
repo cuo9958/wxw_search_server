@@ -5,6 +5,7 @@ html {
     -webkit-text-size-adjust: 100%;
     box-sizing: border-box;
     text-size-adjust: 100%;
+    background: #1f2d3d;
 }
 
 *,
@@ -14,7 +15,7 @@ html {
 }
 
 body {
-    background-color: #fff;
+    background: #1f2d3d;
     color: #333;
     font-size: 1rem;
     line-height: 1.5;
@@ -51,9 +52,7 @@ figure,
 hr,
 ol,
 p,
-pre,
-table,
-ul {
+pre {
     margin: 0.9375rem 0 0;
 }
 
