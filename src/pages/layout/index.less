@@ -21,14 +21,54 @@
         .el-menu--horizontal.el-menu--dark .el-submenu .el-menu-item,
         .el-menu-item {
             color: #eff2f7;
+
+            .fa {
+                margin-bottom: 3px;
+            }
         }
         .el-menu--horizontal.el-menu--dark .el-submenu .el-menu-item.is-active,
         .el-menu-item.is-active {
             color: #20a0ff;
+            // background: #475669;
+        }
+
+        .menu_bg {
+            margin: 0;
+            background: #324057;
+            list-style: none;
+            padding: 0;
+        }
+        .menu_item {
+            color: #eff2f7;
+            height: 56px;
+            line-height: 56px;
+            cursor: pointer;
+            font-size: 14px;
+            padding: 0 20px;
+
+            &:hover {
+                background: #475669;
+            }
+            &.active {
+                color: #20a0ff;
+            }
         }
     }
 }
 #main {
     margin-left: @left-width;
-    padding: 10px;
+
+    .top_menus {
+        border-bottom: solid 1px #eff2f7;
+        padding: 10px;
+        height: 40px;
+        font-size: 12px;
+
+        .el-dropdown {
+            font-size: 12px;
+        }
+    }
+    .continer {
+        padding: 10px;
+    }
 }
