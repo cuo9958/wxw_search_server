@@ -1,5 +1,4 @@
 const Router = require('koa-router');
-const ProductModel = require('../data/product_imgs');
 
 const router = new Router();
 

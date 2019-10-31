@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 const db = require('../db/mysql');
+const Op = Sequelize.Op;
 
 const Product = db.define(
     't_search_product',
@@ -78,17 +79,26 @@ module.exports = {
     insert: function(model) {
         return Product.create(model);
     },
-    isAt: function(id) {
+    getCount(limit = 1, opts = {}) {
+        let config = {
+            limit: 20,
+            offset: (limit - 1) * 20,
+            order: [['status', 'desc'], ['id', 'desc']]
+        };
+        return Product.findAndCountAll(config);
+    },
+    find: function() {
         return Product.findOne({
-            where: {
-                fid: id
-            },
             order: [['id', 'desc']]
         });
     },
-
-    find: function() {
+    like() {
         return Product.findOne({
+            where: {
+                image: {
+                    [Op.like]: '%086006.com%'
+                }
+            },
             order: [['id', 'desc']]
         });
     },
@@ -105,13 +115,5 @@ module.exports = {
                 id
             }
         });
-    },
-    getCount(limit = 1, opts = {}) {
-        let config = {
-            limit: 20,
-            offset: (limit - 1) * 20,
-            order: [['status', 'desc'], ['id', 'desc']]
-        };
-        return Product.findAndCountAll(config);
     }
 };
