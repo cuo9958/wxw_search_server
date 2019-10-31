@@ -17,9 +17,11 @@ app.use(
 );
 
 const goods = require('./api/goods');
+const user = require('./api/user');
 const test = require('./api/index');
 
 router.use('/api/goods', goods.routers);
+router.use('/api/user', user.routers);
 router.use('/api/test', test.routers);
 
 app.use(router.routes()).use(router.allowedMethods());
