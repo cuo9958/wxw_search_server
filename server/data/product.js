@@ -83,22 +83,13 @@ module.exports = {
         let config = {
             limit: 20,
             offset: (limit - 1) * 20,
-            order: [['status', 'desc'], ['id', 'desc']]
+            order: [['id', 'desc']]
         };
         return Product.findAndCountAll(config);
     },
-    find: function() {
+    find: function(id) {
         return Product.findOne({
-            order: [['id', 'desc']]
-        });
-    },
-    like() {
-        return Product.findOne({
-            where: {
-                image: {
-                    [Op.like]: '%086006.com%'
-                }
-            },
+            where: { id },
             order: [['id', 'desc']]
         });
     },

@@ -57,5 +57,12 @@ const ProductImgs = db.define(
 module.exports = {
     insert: function(model) {
         return ProductImgs.create(model);
+    },
+    get: function(sku) {
+        return ProductImgs.findAll({
+            where: {
+                sku
+            }
+        });
     }
 };

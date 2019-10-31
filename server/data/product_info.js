@@ -72,5 +72,12 @@ const ProductInfo = db.define(
 module.exports = {
     insert: function(model) {
         return ProductInfo.create(model);
+    },
+    get: function(sku) {
+        return ProductInfo.findOne({
+            where: {
+                sku
+            }
+        });
     }
 };
