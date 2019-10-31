@@ -49,6 +49,22 @@ const User = db.define(
 // User.sync({ force: true });
 
 module.exports = {
+    findTell(tell, pwd) {
+        return User.findOne({
+            where: {
+                tell,
+                pwd
+            }
+        });
+    },
+    findFinger(finger) {
+        return User.findOne({
+            where: {
+                finger
+            }
+        });
+    },
+    //======
     insert: function(model) {
         return User.create(model);
     },

@@ -86,13 +86,14 @@
   },
   "devDependencies": {
     "@types/jest": "24.0.20",
+    "@types/json5": "0.0.30",
+    "@types/koa": "^2.0.51",
     "@types/node": "12.11.7",
     "@types/react": "16.9.11",
     "@types/react-dom": "16.9.3",
+    "@types/react-router-dom": "^5.1.0",
     "@typescript-eslint/eslint-plugin": "^2.2.0",
     "@typescript-eslint/parser": "^2.2.0",
-    "@types/json5": "0.0.30",
-    "@types/react-router-dom": "^5.1.0",
     "react-hot-loader": "^4.12.15"
   },
   "eslintConfig": {
