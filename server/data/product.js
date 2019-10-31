@@ -11,6 +11,7 @@ const Product = db.define(
         },
         fid: {
             type: Sequelize.INTEGER,
+            defaultValue: 0,
             comment: '复制来源id'
         },
         sku: {
@@ -60,7 +61,13 @@ const Product = db.define(
         }
     },
     {
-        freezeTableName: true
+        freezeTableName: true,
+        indexes: [
+            {
+                unique: false,
+                fields: ['sku']
+            }
+        ]
     }
 );
 
@@ -70,5 +77,41 @@ const Product = db.define(
 module.exports = {
     insert: function(model) {
         return Product.create(model);
+    },
+    isAt: function(id) {
+        return Product.findOne({
+            where: {
+                fid: id
+            },
+            order: [['id', 'desc']]
+        });
+    },
+
+    find: function() {
+        return Product.findOne({
+            order: [['id', 'desc']]
+        });
+    },
+    update: function(model, id) {
+        return Product.update(model, {
+            where: {
+                id
+            }
+        });
+    },
+    get: function(id) {
+        return Product.findOne({
+            where: {
+                id
+            }
+        });
+    },
+    getCount(limit = 1, opts = {}) {
+        let config = {
+            limit: 20,
+            offset: (limit - 1) * 20,
+            order: [['status', 'desc'], ['id', 'desc']]
+        };
+        return Product.findAndCountAll(config);
     }
 };
