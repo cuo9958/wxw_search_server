@@ -85,8 +85,11 @@ module.exports = {
      * @param {*} finger
      */
     async fingerLogin(finger) {
-        const data = await UserModel.findTell(finger);
-        if (!data) throw new Error('用户未注册');
+        let data = await UserModel.findFinger(finger);
+        if (!data)
+            data = await UserModel.insert({
+                finger
+            });
         const token = getGuid();
         const key = 'finger_' + finger + '_' + token;
         const userModel = {
@@ -100,5 +103,14 @@ module.exports = {
         Redis.set(key, JSON.stringify(userModel));
         caches.set(key, userModel);
         return userModel;
+    },
+    /**
+     * 检查指纹的合法性
+     * @param {*} finger
+     */
+    checkFinger(finger, accept) {
+        if (finger.length < 10) return false;
+        if (accept.length < 10) return false;
+        return true;
     }
 };

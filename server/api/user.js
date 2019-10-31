@@ -59,9 +59,15 @@ router.all('/login', async function(ctx, next) {
 /**
  * 指纹登录
  */
-router.post('/singer', async function(ctx, next) {
+router.all('/finger', async function(ctx, next) {
     const finger = ctx.request.body.finger || ctx.query.finger || '';
     try {
+        if (!AuthService.checkFinger(finger, ctx.header.accept)) {
+            return (ctx.body = {
+                code: 0,
+                msg: '不合法的注册'
+            });
+        }
         const res = await AuthService.fingerLogin(finger);
         ctx.body = {
             code: 1,
