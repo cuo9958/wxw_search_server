@@ -1,0 +1,12 @@
+{
+    "apps": [{
+        "name": "search_server",
+        "script": "server/index.js",
+        "args": [],
+        "env": {
+            "PORT": "8200",
+            "NODE_ENV": "development",
+            "SERVER_ENV": "dev"
+        }
+    }]
+}
