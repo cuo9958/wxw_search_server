@@ -49,10 +49,10 @@ export default class extends React.Component<iReactRoute, iState> {
                 return (
                     <Button.Group>
                         <Button type="primary" size="small">
-                            上一页
+                            编辑
                         </Button>
-                        <Button type="primary" size="small">
-                            下一页
+                        <Button type="danger" size="small">
+                            删除
                         </Button>
                     </Button.Group>
                 );
