@@ -64,6 +64,14 @@ module.exports = {
             }
         });
     },
+    getCount(limit = 1, opts = {}) {
+        let config = {
+            limit: 20,
+            offset: (limit - 1) * 20,
+            order: [['id', 'desc']]
+        };
+        return User.findAndCountAll(config);
+    },
     //======
     insert: function(model) {
         return User.create(model);
@@ -89,14 +97,7 @@ module.exports = {
             }
         });
     },
-    getCount(limit = 1, opts = {}) {
-        let config = {
-            limit: 20,
-            offset: (limit - 1) * 20,
-            order: [['status', 'desc'], ['id', 'desc']]
-        };
-        return User.findAndCountAll(config);
-    },
+
     change: function(status, id) {
         const model = {
             status

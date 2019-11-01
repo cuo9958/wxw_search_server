@@ -16,5 +16,5 @@ module.exports = async function auth(ctx, next) {
     if (ctx.user) {
         ctx.isLogin = true;
     }
-    next();
+    await next();
 };
