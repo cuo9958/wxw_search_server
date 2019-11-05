@@ -4,7 +4,7 @@
         "script": "server/index.js",
         "args": [],
         "env": {
-            "PORT": "8200",
+            "PORT": "8300",
             "NODE_ENV": "development",
             "SERVER_ENV": "dev"
         }
