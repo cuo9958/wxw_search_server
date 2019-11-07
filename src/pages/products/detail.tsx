@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Input, Upload, Radio, Button } from 'element-react';
+import { Form, Input, Upload, Button, Notification } from 'element-react';
 import './index.less';
 import request from '../../services/request';
 import Utils from '../../services/utils';
@@ -8,6 +8,24 @@ import 'braft-editor/dist/index.css';
 
 interface iModel {
     [index: string]: any;
+
+    id: number;
+    sku: string;
+    pre: string;
+    name: string;
+    title: string;
+    des: string;
+    image: string;
+    price: string;
+    unit: string;
+    spec: string;
+    place: string;
+    express: string;
+    ship_area: string;
+    after_sale: string;
+    pack: string;
+    txts: string;
+    imgs: string[];
 }
 interface iState {
     model: iModel;
@@ -20,7 +38,25 @@ export default class extends React.Component<iReactRoute, iState> {
     constructor(props: any) {
         super(props);
         this.state = {
-            model: {},
+            model: {
+                id: 0,
+                sku: '',
+                pre: '',
+                name: '',
+                title: '',
+                des: '',
+                image: '',
+                price: '',
+                unit: '',
+                spec: '',
+                place: '',
+                express: '',
+                ship_area: '',
+                after_sale: '',
+                pack: '',
+                txts: '',
+                imgs: []
+            },
             EditorState: BraftEditor.createEditorState('')
         };
         this.params = Utils.parseParams(this.props.location.search).query;
@@ -60,7 +96,6 @@ export default class extends React.Component<iReactRoute, iState> {
                                 <i className="el-icon-plus avatar-uploader-icon"></i>
                             )}
                         </Upload>
-                        {/* <Input value={this.state.model.image} onChange={this.onChange.bind(this, 'name')}></Input> */}
                     </Form.Item>
                     <Form.Item label="售价">
                         <Input className="input_s" value={this.state.model.price} onChange={this.onChange.bind(this, 'price')}></Input>
@@ -68,12 +103,12 @@ export default class extends React.Component<iReactRoute, iState> {
                     <Form.Item label="单位">
                         <Input className="input_s" value={this.state.model.unit} onChange={this.onChange.bind(this, 'unit')}></Input>
                     </Form.Item>
-                    <Form.Item label="状态">
+                    {/* <Form.Item label="状态">
                         <Radio.Group value={this.state.model.status} onChange={this.onChange.bind(this, 'status')}>
                             <Radio value="0">可编辑</Radio>
                             <Radio value="1">已上架</Radio>
                         </Radio.Group>
-                    </Form.Item>
+                    </Form.Item> */}
                     <Form.Item label="规格">
                         <Input className="input_s" value={this.state.model.spec} onChange={this.onChange.bind(this, 'spec')}></Input>
                     </Form.Item>
@@ -162,12 +197,16 @@ export default class extends React.Component<iReactRoute, iState> {
     save = async () => {
         const model = this.state.model;
         model.txts = this.state.EditorState.toHTML();
-
         console.log(this.state.model);
         try {
             await request.post('/goods', model);
+            Notification({
+                message: '保存成功',
+                type: 'success'
+            });
         } catch (error) {
             console.log(error);
+            Notification.error({ message: error.message });
         }
     };
 }

@@ -79,5 +79,10 @@ module.exports = {
                 sku
             }
         });
+    },
+    update(model) {
+        return ProductInfo.update(model, {
+            where: { sku: model.sku }
+        });
     }
 };

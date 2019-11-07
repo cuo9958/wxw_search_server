@@ -1,9 +1,13 @@
 const Router = require('koa-router');
 const ProductModel = require('../data/product');
 const ProductInfo = require('../data/product_info');
-const ProductImgs = require('../data/product_imgs');
+// const ProductImgs = require('../data/product_imgs');
+const generate = require('nanoid/non-secure/generate');
 
 const router = new Router();
+function getGuid() {
+    return generate('0123456789abcdefghijklmnpqrstuvwxyz', 10);
+}
 
 router.get('/', async function(ctx, next) {
     const { pageindex } = ctx.query;
@@ -24,13 +28,41 @@ router.get('/', async function(ctx, next) {
 //保存
 router.post('/', async function(ctx, next) {
     const data = ctx.request.body;
-    
 
-    const { id } = ctx.params;
+    let sku = data.sku;
+    if (!sku) sku = getGuid();
+    const model_product = {
+        id: data.id || 0,
+        sku,
+        pre: data.pre,
+        name: data.name,
+        title: data.title,
+        des: data.des,
+        image: data.image,
+        price: data.price,
+        unit: data.unit
+    };
+    const model_info = {
+        sku,
+        spec: data.spec,
+        place: data.place,
+        express: data.express,
+        ship_area: data.ship_area,
+        after_sale: data.after_sale,
+        pack: data.pack,
+        txts: data.txts
+    };
+
     try {
-        // const data = await ProductModel.updateStatus(99, id);
+        if (data.id) {
+            ProductModel.update(model_product);
+            ProductInfo.update(model_info);
+        } else {
+            ProductModel.insert(model_product);
+            ProductInfo.insert(model_info);
+        }
         ctx.body = {
-            code: 1,
+            code: 1
             // data
         };
     } catch (e) {
@@ -87,11 +119,11 @@ router.get('/:id', async function(ctx, next) {
             info.txts = info.txts.replace(/static\.086006\.com/g, 'wxw.bxiaob.top');
             info.save();
         }
-        const imgs = await ProductImgs.get(data.sku);
+        // const imgs = await ProductImgs.get(data.sku);
         const model = {
             ...data.dataValues,
-            ...info.dataValues,
-            imgs: imgs
+            ...info.dataValues
+            // imgs: imgs
         };
         ctx.body = {
             code: 1,
