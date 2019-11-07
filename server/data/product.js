@@ -58,7 +58,7 @@ const Product = db.define(
         status: {
             type: Sequelize.TINYINT(2),
             defaultValue: 0,
-            comment: '状态;0:失效;1:使用'
+            comment: '状态;0:失效;1:使用;99:删除'
         }
     },
     {
@@ -75,6 +75,9 @@ const Product = db.define(
 //强制初始化数据库
 // Product.sync({ force: true });
 
+/**
+ * status=99，删除
+ */
 module.exports = {
     insert: function(model) {
         return Product.create(model);
@@ -83,6 +86,9 @@ module.exports = {
         let config = {
             limit: 20,
             offset: (limit - 1) * 20,
+            where: {
+                status: { [Op.not]: 99 }
+            },
             order: [['id', 'desc']]
         };
         return Product.findAndCountAll(config);
