@@ -28,7 +28,7 @@ const Product = db.define(
         name: {
             type: Sequelize.STRING(20),
             defaultValue: '',
-            comment: '埋点'
+            comment: '卖点'
         },
         title: {
             type: Sequelize.STRING(100),
@@ -106,5 +106,15 @@ module.exports = {
                 id
             }
         });
+    },
+    updateStatus: function(status, id) {
+        return Product.update(
+            { status },
+            {
+                where: {
+                    id
+                }
+            }
+        );
     }
 };

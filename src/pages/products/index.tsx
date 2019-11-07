@@ -1,16 +1,19 @@
 import React from 'react';
 import { Table, Pagination, Button } from 'element-react';
 import './index.less';
+import request from '../../services/request';
 
 interface iState {
     list: any[];
+    count: number;
 }
 
 export default class extends React.Component<any, iState> {
     constructor(props: any) {
         super(props);
         this.state = {
-            list: []
+            list: [],
+            count: 0
         };
     }
     columns = [
@@ -30,7 +33,7 @@ export default class extends React.Component<any, iState> {
         {
             label: '标题',
             prop: 'title',
-            width: 180,
+            // width: 180,
             render: (row: any) => {
                 return (
                     <div>
@@ -41,26 +44,47 @@ export default class extends React.Component<any, iState> {
             }
         },
         {
-            label: '产地',
-            prop: 'address'
+            label: '价格',
+            prop: 'price',
+            width: 100,
+            render: (row: any) => {
+                return (
+                    <div>
+                        {row.price}
+                        <span>{row.unit}</span>
+                    </div>
+                );
+            }
         },
         {
-            label: '联系人',
-            prop: 'concat',
-            width: 90
+            label: '状态',
+            prop: 'status',
+            width: 90,
+            render: (row: any) => {
+                if (row.status === 0) return '可编辑';
+                if (row.status === 1) return '上架中';
+                return '';
+            }
         },
         {
             label: '操作',
-            width: 180,
+            width: 150,
             render: (row: any) => {
                 return (
                     <Button.Group>
-                        <Button type="primary" size="small">
-                            上一页
+                        <Button onClick={() => this.edit(row.id)} type="primary" size="small">
+                            编辑
                         </Button>
-                        <Button type="primary" size="small">
-                            下一页
-                        </Button>
+                        {row.status === 0 && (
+                            <Button onClick={() => this.updown(row.id, row.status)} type="primary" size="small">
+                                上架
+                            </Button>
+                        )}
+                        {row.status === 1 && (
+                            <Button onClick={() => this.updown(row.id, row.status)} type="primary" size="small">
+                                下架
+                            </Button>
+                        )}
                     </Button.Group>
                 );
             }
@@ -78,17 +102,36 @@ export default class extends React.Component<any, iState> {
     }
 
     componentDidMount() {
-        const list: any[] = [];
-        for (let index = 0; index < 20; index++) {
-            list.push({
-                id: index,
-                title: 'title' + index,
-                name: 'name' + index,
-                concat: '郭方超',
-                address: '北京市',
-                image: 'http://img5.daling.com/data/files/zin/public/common/2019/10/17/14/31/45/AIKGUER000002239101.JPG_375x375.jpg'
+        this.getList();
+    }
+
+    async getList() {
+        try {
+            const data = await request.get('/goods', { pageindex: 1 });
+            this.setState({
+                list: data.rows,
+                count: data.count
             });
+        } catch (error) {
+            console.log(error);
         }
-        this.setState({ list });
+    }
+
+    edit(id: number) {
+        console.log(id);
+        // this.props.history.push('/');
+    }
+    /**
+     * 上下架操作
+     * @param id
+     * @param status
+     */
+    async updown(id: number, status: number) {
+        try {
+            await request.post('/goods/updown/' + id + '/' + status);
+            this.getList();
+        } catch (error) {
+            console.log(error);
+        }
     }
 }
