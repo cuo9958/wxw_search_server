@@ -17,6 +17,7 @@
     "babel-loader": "8.0.6",
     "babel-plugin-named-asset-import": "^0.3.4",
     "babel-preset-react-app": "^9.0.2",
+    "braft-editor": "^2.3.8",
     "camelcase": "^5.2.0",
     "case-sensitive-paths-webpack-plugin": "2.2.0",
     "config": "^3.2.4",
@@ -79,6 +80,7 @@
     "ts-pnp": "1.1.4",
     "typescript": "3.6.4",
     "url-loader": "2.1.0",
+    "url-parse": "^1.4.7",
     "webpack": "4.41.0",
     "webpack-dev-server": "3.2.1",
     "webpack-manifest-plugin": "2.1.1",
@@ -92,6 +94,7 @@
     "@types/react": "16.9.11",
     "@types/react-dom": "16.9.3",
     "@types/react-router-dom": "^5.1.0",
+    "@types/url-parse": "^1.4.3",
     "@typescript-eslint/eslint-plugin": "^2.2.0",
     "@typescript-eslint/parser": "^2.2.0",
     "react-hot-loader": "^4.12.15"

@@ -849,3 +849,6 @@ a.text-primary {
 #root {
     min-height: 100vh;
 }
+.bf-container {
+    border: solid 1px #ccc;
+}

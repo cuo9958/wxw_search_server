@@ -21,6 +21,26 @@ router.get('/', async function(ctx, next) {
         };
     }
 });
+//保存
+router.post('/', async function(ctx, next) {
+    const data = ctx.request.body;
+    
+
+    const { id } = ctx.params;
+    try {
+        // const data = await ProductModel.updateStatus(99, id);
+        ctx.body = {
+            code: 1,
+            // data
+        };
+    } catch (e) {
+        console.log(e);
+        ctx.body = {
+            code: 0,
+            msg: e.message
+        };
+    }
+});
 //上下架
 router.post('/updown/:id/:status', async function(ctx, next) {
     const { id, status } = ctx.params;

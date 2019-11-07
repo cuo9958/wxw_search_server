@@ -8,7 +8,7 @@ import Err404 from '../pages/404/index';
 export default [
     {
         /**
-         * 页面名
+         * 页面名,菜单命中
          */
         name: 'home',
         /**
