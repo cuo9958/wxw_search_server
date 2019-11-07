@@ -134,8 +134,7 @@ export default class extends React.Component<any, iState> {
     }
 
     edit(id: number) {
-        console.log(id);
-        // this.props.history.push('/');
+        this.props.history.push('/products/detail?id=' + id);
     }
     async del(id: number) {
         try {

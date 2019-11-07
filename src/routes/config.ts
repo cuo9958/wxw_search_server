@@ -1,6 +1,7 @@
 import Home from '../pages/home/index';
 import Login from '../pages/login/index';
 import Products from '../pages/products/index';
+import ProductsDetail from '../pages/products/detail';
 import Users from '../pages/users/index';
 import Err404 from '../pages/404/index';
 
@@ -39,7 +40,11 @@ export default [
          */
         hide: false
     },
+    //商品列表
     { name: 'Products', title: '商品列表', icon: 'fa fa-ship', path: '/products', page: Products, exact: true },
+    //商品详情
+    { name: 'Products', title: '商品详情', hide: true, path: '/products/detail', page: ProductsDetail, exact: true },
+    //用户管理
     { name: 'users', title: '用户管理', icon: 'fa fa-user', path: '/users', page: Users, exact: true },
 
     { name: 'login', title: '登录', icon: 'fa fa-bars', hideLayout: true, hide: true, path: '/login', page: Login, exact: true },

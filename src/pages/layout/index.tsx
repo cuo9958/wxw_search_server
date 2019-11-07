@@ -7,7 +7,7 @@ import url_configs from '../../routes/config';
 function Menus(item: any, onSelect: any, active: string) {
     if (item.hide) return;
     return (
-        <li key={item.name} className={'menu_item' + (active === item.path ? ' active' : '')} onClick={() => onSelect(item.path)}>
+        <li key={item.name} className={'menu_item' + (active === item.name ? ' active' : '')} onClick={() => onSelect(item.path)}>
             {item.icon && <i className={item.icon}></i>}
             {item.title}
         </li>
@@ -24,7 +24,7 @@ export default class extends React.Component<iReactRoute, iState> {
         super(props);
         const curr = Utils.checkUrl(props.location.pathname);
         this.state = {
-            active: curr.path,
+            active: curr.name,
             layout: !curr.hideLayout
         };
     }
@@ -66,7 +66,7 @@ export default class extends React.Component<iReactRoute, iState> {
     componentWillReceiveProps(pp: any) {
         const curr = Utils.checkUrl(pp.location.pathname);
         this.setState({
-            active: curr.path,
+            active: curr.name,
             layout: !curr.hideLayout
         });
     }
