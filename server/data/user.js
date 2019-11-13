@@ -72,6 +72,13 @@ module.exports = {
         };
         return User.findAndCountAll(config);
     },
+    get: function(id) {
+        return User.findOne({
+            where: {
+                id
+            }
+        });
+    },
     //======
     insert: function(model) {
         return User.create(model);
@@ -90,13 +97,7 @@ module.exports = {
             }
         });
     },
-    get: function(id) {
-        return User.findOne({
-            where: {
-                id
-            }
-        });
-    },
+    
 
     change: function(status, id) {
         const model = {

@@ -48,7 +48,7 @@ export default class extends React.Component<iReactRoute, iState> {
             render: (row: any) => {
                 return (
                     <Button.Group>
-                        <Button type="primary" size="small">
+                        <Button onClick={()=>this.goDetail(row.id)} type="primary" size="small">
                             编辑
                         </Button>
                         <Button type="danger" size="small">
@@ -95,4 +95,8 @@ export default class extends React.Component<iReactRoute, iState> {
     onCurrentChange = (pageIndex: number) => {
         console.log(pageIndex);
     };
+
+    goDetail(id:number){
+        this.props.history.push('/users/detail?id=' + id);
+    }
 }

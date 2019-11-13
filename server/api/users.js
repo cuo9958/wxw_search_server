@@ -23,5 +23,22 @@ router.get('/', AuthMiddleware, async (ctx, next) => {
         };
     }
 });
+router.get('/:id', AuthMiddleware, async (ctx, next) => {
+    const id = ctx.params.id || '';
+    try {
+        if (!id) throw new Error('不存在的用户');
+        const data = await UserModel.get(id);
+        ctx.body = {
+            code: 1,
+            data
+        };
+    } catch (error) {
+        console.log(error);
+        ctx.body = {
+            code: 0,
+            data: error
+        };
+    }
+});
 
 exports.routers = router.routes();
