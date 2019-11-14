@@ -79,6 +79,13 @@ module.exports = {
             }
         });
     },
+    update: function(model, id) {
+        return User.update(model, {
+            where: {
+                id
+            }
+        });
+    },
     //======
     insert: function(model) {
         return User.create(model);
@@ -90,15 +97,6 @@ module.exports = {
             }
         });
     },
-    update: function(model, id) {
-        return User.update(model, {
-            where: {
-                id
-            }
-        });
-    },
-    
-
     change: function(status, id) {
         const model = {
             status

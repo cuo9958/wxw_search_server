@@ -39,5 +39,31 @@ router.get('/:id', async (ctx, next) => {
         };
     }
 });
+router.post('/:id', async (ctx, next) => {
+    const id = ctx.params.id || '';
+    try {
+        if (!id) throw new Error('不存在的用户');
+        const { nickname, headimg, tell, pwd, status } = ctx.request.body;
+        const model = {
+            nickname,
+            headimg,
+            tell
+        };
+        if (pwd) {
+            model.pwd = pwd;
+        }
+        const data = await UserModel.update(model, id);
+        ctx.body = {
+            code: 1,
+            data
+        };
+    } catch (error) {
+        console.log(error);
+        ctx.body = {
+            code: 0,
+            data: error
+        };
+    }
+});
 
 exports.routers = router.routes();

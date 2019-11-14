@@ -51,7 +51,7 @@ export default class extends React.Component<iReactRoute, iState> {
                         <Input className="input_s" disabled value={this.state.model.id} onChange={this.onChange.bind(this, 'id')}></Input>
                     </Form.Item>
                     <Form.Item label="昵称">
-                        <Input className="input_s" disabled value={this.state.model.nickname} onChange={this.onChange.bind(this, 'nickname')}></Input>
+                        <Input className="input_s" value={this.state.model.nickname} onChange={this.onChange.bind(this, 'nickname')}></Input>
                     </Form.Item>
                     <Form.Item label="头像">
                         <Upload onSuccess={this.uploaded} className="willupload" action="/api/upload" showFileList={false}>
@@ -62,13 +62,13 @@ export default class extends React.Component<iReactRoute, iState> {
                         <Input className="input_s" disabled value={this.state.model.pwd} onChange={this.onChange.bind(this, 'pwd')}></Input>
                     </Form.Item>
                     <Form.Item label="电话">
-                        <Input className="input_s" disabled value={this.state.model.tell} onChange={this.onChange.bind(this, 'tell')}></Input>
+                        <Input className="input_s" value={this.state.model.tell} onChange={this.onChange.bind(this, 'tell')}></Input>
                     </Form.Item>
                     <Form.Item label="指纹">
                         <Input className="input_s2" disabled value={this.state.model.finger} onChange={this.onChange.bind(this, 'finger')}></Input>
                     </Form.Item>
                     <Form.Item label="状态">
-                        <Input className="input_s2" disabled value={this.state.model.finger} onChange={this.onChange.bind(this, 'finger')}></Input>
+                        <Input className="input_s2" disabled value={this.state.model.status} onChange={this.onChange.bind(this, 'status')}></Input>
                     </Form.Item>
                     <Form.Item label="创建日期">{this.state.model.createdAt}</Form.Item>
                     <Form.Item label="">
@@ -116,8 +116,17 @@ export default class extends React.Component<iReactRoute, iState> {
     }
     uploaded = (e: any) => {
         console.log(e);
+        if (e.code === 1) {
+            const url = e.data.url;
+            this.onChange('headimg', url);
+        }
     };
-    save = () => {
+    save = async () => {
         console.log(this.state.model);
+        try {
+            const data = await request.post('/users/' + this.params.id, this.state.model);
+        } catch (error) {
+            console.log(error);
+        }
     };
 }
