@@ -13,5 +13,11 @@ module.exports = {
         connectionLimit: 2
     },
     redis: '',
-    redisCluster: []
+    redisCluster: [],
+    qiniu: {
+        path: 'http://wxw.bxiaob.top', //静态文件的host
+        accessKey: '',
+        secretKey: '',
+        scope: '086006'
+    }
 };

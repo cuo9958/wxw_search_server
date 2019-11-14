@@ -1,5 +1,4 @@
 const Router = require('koa-router');
-const AuthMiddleware = require('../middleware/auth');
 const AuthService = require('../services/auth');
 
 const router = new Router();
@@ -8,7 +7,7 @@ const router = new Router();
 /**
  * 获取用户信息
  */
-router.get('/', AuthMiddleware, function(ctx, next) {
+router.get('/', function(ctx, next) {
     if (ctx.isLogin) {
         ctx.body = {
             code: 1,
@@ -24,7 +23,7 @@ router.get('/', AuthMiddleware, function(ctx, next) {
 /**
  * 鉴权
  */
-router.get('/auth', AuthMiddleware, function(ctx, next) {
+router.get('/auth', function(ctx, next) {
     if (ctx.isLogin) {
         ctx.body = {
             code: 1,

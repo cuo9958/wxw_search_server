@@ -54,7 +54,7 @@ export default class extends React.Component<iReactRoute, iState> {
                         <Input className="input_s" disabled value={this.state.model.nickname} onChange={this.onChange.bind(this, 'nickname')}></Input>
                     </Form.Item>
                     <Form.Item label="头像">
-                        <Upload onSuccess={this.uploaded} className="willupload" action="//jsonplaceholder.typicode.com/posts/" showFileList={false}>
+                        <Upload onSuccess={this.uploaded} className="willupload" action="/api/upload" showFileList={false}>
                             {this.state.model.headimg ? <img src={this.state.model.headimg} alt="" /> : <i className="el-icon-plus avatar-uploader-icon"></i>}
                         </Upload>
                     </Form.Item>

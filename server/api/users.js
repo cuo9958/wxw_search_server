@@ -1,5 +1,4 @@
 const Router = require('koa-router');
-const AuthMiddleware = require('../middleware/auth');
 const LoginMiddleware = require('../middleware/login');
 const UserModel = require('../data/user');
 
@@ -7,7 +6,7 @@ const router = new Router();
 /**
  * 获取用户列表
  */
-router.get('/', AuthMiddleware, async (ctx, next) => {
+router.get('/', async (ctx, next) => {
     const pageIndex = ctx.query.pageIndex;
     try {
         const data = await UserModel.getCount(pageIndex);
@@ -23,7 +22,7 @@ router.get('/', AuthMiddleware, async (ctx, next) => {
         };
     }
 });
-router.get('/:id', AuthMiddleware, async (ctx, next) => {
+router.get('/:id', async (ctx, next) => {
     const id = ctx.params.id || '';
     try {
         if (!id) throw new Error('不存在的用户');
