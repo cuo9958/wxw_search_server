@@ -122,5 +122,21 @@ module.exports = {
                 }
             }
         );
+    },
+    search(key = '', limit = 1) {
+        let config = {
+            limit: 20,
+            offset: (limit - 1) * 20,
+            where: {
+                status: { [Op.not]: 99 }
+            },
+            order: [['id', 'desc']]
+        };
+        if (key) {
+            config.where.title = {
+                [Op.like]: '%' + key + '%'
+            };
+        }
+        return Product.findAll(config);
     }
 };

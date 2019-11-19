@@ -23,12 +23,14 @@ const goods = require('./api/goods');
 const user = require('./api/user');
 const users = require('./api/users');
 const upload = require('./api/upload');
+const search = require('./api/search');
 const test = require('./api/index');
 
 router.use('/api/goods', goods.routers);
 router.use('/api/user', user.routers);
 router.use('/api/users', users.routers);
 router.use('/api/upload', upload.routers);
+router.use('/api/search', search.routers);
 router.use('/api/test', test.routers);
 
 app.use(router.routes()).use(router.allowedMethods());
