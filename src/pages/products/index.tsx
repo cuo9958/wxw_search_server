@@ -50,7 +50,7 @@ export default class extends React.Component<any, iState> {
             render: (row: any) => {
                 return (
                     <div>
-                        {row.price}
+                        {row.price}/
                         <span>{row.unit}</span>
                     </div>
                 );
