@@ -128,7 +128,7 @@ module.exports = {
             limit: 20,
             offset: (limit - 1) * 20,
             where: {
-                status: { [Op.not]: 99 }
+                status: 1
             },
             order: [['id', 'desc']]
         };
