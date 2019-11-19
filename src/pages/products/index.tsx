@@ -122,6 +122,9 @@ export default class extends React.Component<any, iState> {
         if (pageIndex && !isNaN(pageIndex)) {
             this.pageIndex = pageIndex;
         }
+        this.setState({
+            list: [],
+        });
         try {
             const data = await request.get('/goods', { pageindex: this.pageIndex });
             this.setState({
