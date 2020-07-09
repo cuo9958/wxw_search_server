@@ -7,6 +7,7 @@
             "PORT": "8300",
             "NODE_ENV": "development",
             "SERVER_ENV": "dev"
-        }
+        },
+        "instances": 1
     }]
 }
